@@ -104,10 +104,11 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if not state in self.Q:
-            self.Q[state] = dict((act, 0.0) for act in self.valid_actions)
-            #for act in self.valid_actions:
-            #    self.Q[state][act] = 0.0
+        if self.learning:
+            if not state in self.Q:
+                self.Q[state] = dict((act, 0.0) for act in self.valid_actions)
+                #for act in self.valid_actions:
+                #    self.Q[state][act] = 0.0
         return
 
 
@@ -199,7 +200,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env,display= False, update_delay= 0.01, log_metrics= True, optimized= True)
+    sim = Simulator(env,display=False, update_delay= 0.001, log_metrics= True, optimized= True)
     
     ##############
     # Run the simulator
